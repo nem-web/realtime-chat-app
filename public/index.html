@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="home-screen" class="screen active">
+            <div class="header">
+                <h1>Modern Chat</h1>
+                <p>Connect instantly with real-time messaging</p>
+            </div>
+            
+            <div class="actions">
+                <button id="create-room-btn" class="btn primary">Create Room</button>
+                <button id="join-room-btn" class="btn secondary">Join Room</button>
+            </div>
+            
+            <div id="rooms-list" class="rooms-container">
+                <h3>Available Rooms</h3>
+                <div id="rooms"></div>
+            </div>
+        </div>
+
+        <div id="create-room-screen" class="screen">
+            <div class="form-container">
+                <h2>Create New Room</h2>
+                <input type="text" id="new-room-name" placeholder="Room Name" maxlength="20">
+                <input type="password" id="new-room-password" placeholder="Room Password">
+                <div class="form-actions">
+                    <button id="create-room-submit" class="btn primary">Create</button>
+                    <button id="back-from-create" class="btn secondary">Back</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="join-room-screen" class="screen">
+            <div class="form-container">
+                <h2>Join Room</h2>
+                <input type="text" id="join-username" placeholder="Your Username" maxlength="15">
+                <select id="room-select">
+                    <option value="">Select a room</option>
+                </select>
+                <input type="password" id="join-password" placeholder="Room Password">
+                <div class="form-actions">
+                    <button id="join-room-submit" class="btn primary">Join</button>
+                    <button id="back-from-join" class="btn secondary">Back</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="chat-screen" class="screen">
+            <div class="chat-header">
+                <h3 id="room-title"></h3>
+                <button id="leave-room" class="btn secondary small">Leave</button>
+            </div>
+            
+            <div class="chat-container">
+                <div id="messages" class="messages"></div>
+                <div id="users" class="users-panel">
+                    <h4>Online Users</h4>
+                    <div id="user-list"></div>
+                </div>
+            </div>
+            
+            <div class="message-input">
+                <button id="emoji-btn" class="btn secondary small">😊</button>
+                <input type="text" id="message-text" placeholder="Type your message..." maxlength="200">
+                <input type="file" id="image-input" accept="image/*" style="display: none;">
+                <button id="image-btn" class="btn secondary small">📷</button>
+                <button id="call-btn" class="btn secondary small">📞</button>
+                <button id="video-call-btn" class="btn secondary small">📹</button>
+                <button id="send-message" class="btn primary">Send</button>
+            </div>
+            
+            <div id="emoji-picker" class="emoji-picker">
+                <div id="emoji-grid" class="emoji-grid"></div>
+            </div>
+            
+            <div id="call-modal" class="call-modal">
+                <div class="call-content">
+                    <h3 id="call-type">Voice Call</h3>
+                    <div id="call-status">Ready to call</div>
+                    <div id="video-container" class="video-container">
+                        <video id="local-video" autoplay muted></video>
+                        <video id="remote-video" autoplay></video>
+                    </div>
+                    <div class="call-controls">
+                        <button id="mute-btn" class="btn secondary">🎤</button>
+                        <button id="video-toggle-btn" class="btn secondary">📹</button>
+                        <button id="end-call-btn" class="btn primary">End Call</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="incoming-call-modal" class="call-modal">
+                <div class="call-content incoming-call">
+                    <h3 id="incoming-call-type">📞 Incoming Call</h3>
+                    <div id="caller-name">Unknown</div>
+                    <div class="ringing-animation">🔔</div>
+                    <div class="call-controls">
+                        <button id="accept-call-btn" class="btn primary">Accept</button>
+                        <button id="decline-call-btn" class="btn secondary">Decline</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
